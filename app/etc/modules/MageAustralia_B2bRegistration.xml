@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Maho
+ *
+ * @package    MageAustralia_B2bRegistration
+ * @copyright  Copyright (c) 2026 Mage Australia
+ * @license    https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <MageAustralia_B2bRegistration>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Customer/>
+                <MageAustralia_CustomForms/>
+                <MageAustralia_CustomerApproval/>
+            </depends>
+        </MageAustralia_B2bRegistration>
+    </modules>
+</config>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Maho
+ *
+ * @package    MageAustralia_B2bRegistration
+ * @copyright  Copyright (c) 2026 Mage Australia
+ * @license    https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <MageAustralia_B2bRegistration>
+            <version>1.0.0</version>
+        </MageAustralia_B2bRegistration>
+    </modules>
+
+    <global>
+        <helpers>
+            <b2bregistration>
+                <class>MageAustralia_B2bRegistration_Helper</class>
+            </b2bregistration>
+        </helpers>
+        <models>
+            <b2bregistration>
+                <class>MageAustralia_B2bRegistration_Model</class>
+            </b2bregistration>
+        </models>
+        <resources>
+            <b2bregistration_setup>
+                <setup>
+                    <module>MageAustralia_B2bRegistration</module>
+                </setup>
+            </b2bregistration_setup>
+        </resources>
+        <!--
+             The flow is event-driven: Model/Observer.php subscribes to
+             customform_submission_created via a #[Maho\Config\Observer]
+             attribute. Run `composer dump-autoload` after install.
+        -->
+    </global>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <MageAustralia_B2bRegistration>
+                    <files>
+                        <default>MageAustralia_B2bRegistration.csv</default>
+                    </files>
+                </MageAustralia_B2bRegistration>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <b2bregistration>
+            <general>
+                <enabled>0</enabled>
+                <form_codes>trade_application</form_codes>
+                <email_field>email</email_field>
+            </general>
+            <mapping>
+                <!-- JSON object: {"form_field_key":"customer_attribute_code"}.
+                     Convention (key === attribute) applies for anything not listed. -->
+                <overrides>{}</overrides>
+            </mapping>
+        </b2bregistration>
+    </default>
+</config>

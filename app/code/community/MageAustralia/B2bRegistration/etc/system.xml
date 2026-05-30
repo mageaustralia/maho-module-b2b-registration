@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Maho
+ *
+ * @package    MageAustralia_B2bRegistration
+ * @copyright  Copyright (c) 2026 Mage Australia
+ * @license    https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <sections>
+        <b2bregistration translate="label" module="b2bregistration">
+            <label>B2B Registration</label>
+            <tab>customer</tab>
+            <sort_order>420</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Trade-Account Flow</label>
+                    <comment>Converts submissions of the form(s) below into pending customers (managed in Customers &gt; Approvals).</comment>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                        </enabled>
+                        <form_codes translate="label comment">
+                            <label>Trade-application form codes</label>
+                            <comment>Comma-separated Custom Form codes that create a customer on submit. Default: trade_application.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <depends><enabled>1</enabled></depends>
+                            <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                        </form_codes>
+                        <email_field translate="label comment">
+                            <label>Email field key</label>
+                            <comment>Which form field holds the applicant email. Default: email.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <depends><enabled>1</enabled></depends>
+                            <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                        </email_field>
+                    </fields>
+                </general>
+                <mapping translate="label">
+                    <label>Field Mapping</label>
+                    <comment>Form fields map onto customer attributes by convention (field key === attribute code). Add overrides below only when a key differs.</comment>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                    <fields>
+                        <overrides translate="label comment">
+                            <label>Override map (JSON)</label>
+                            <comment><![CDATA[JSON object of <code>{"form_field_key":"customer_attribute_code"}</code>, e.g. <code>{"company_vat":"taxvat"}</code>. Allowed targets: firstname, lastname, email, taxvat, prefix, middlename, suffix, dob, gender.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                        </overrides>
+                    </fields>
+                </mapping>
+            </groups>
+        </b2bregistration>
+    </sections>
+</config>
