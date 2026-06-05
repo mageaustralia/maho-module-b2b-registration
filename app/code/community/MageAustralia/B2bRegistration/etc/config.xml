@@ -11,7 +11,7 @@
 <config>
     <modules>
         <MageAustralia_B2bRegistration>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </MageAustralia_B2bRegistration>
     </modules>
 
@@ -24,8 +24,22 @@
         <models>
             <b2bregistration>
                 <class>MageAustralia_B2bRegistration_Model</class>
+                <resourceModel>b2bregistration_resource</resourceModel>
             </b2bregistration>
+            <b2bregistration_resource>
+                <class>MageAustralia_B2bRegistration_Model_Resource</class>
+                <entities>
+                    <application>
+                        <table>b2b_application</table>
+                    </application>
+                </entities>
+            </b2bregistration_resource>
         </models>
+        <blocks>
+            <b2bregistration>
+                <class>MageAustralia_B2bRegistration_Block</class>
+            </b2bregistration>
+        </blocks>
         <resources>
             <b2bregistration_setup>
                 <setup>
@@ -50,6 +64,13 @@
                 </MageAustralia_B2bRegistration>
             </modules>
         </translate>
+        <layout>
+            <updates>
+                <b2bregistration>
+                    <file>mageaustralia_b2bregistration.xml</file>
+                </b2bregistration>
+            </updates>
+        </layout>
     </adminhtml>
 
     <default>
@@ -58,6 +79,7 @@
                 <enabled>0</enabled>
                 <form_codes>trade_application</form_codes>
                 <email_field>email</email_field>
+                <b2b_group></b2b_group>
             </general>
             <mapping>
                 <!-- JSON object: {"form_field_key":"customer_attribute_code"}.

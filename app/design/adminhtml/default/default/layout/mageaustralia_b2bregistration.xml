@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Maho
+ *
+ * @package    MageAustralia_B2bRegistration
+ * @copyright  Copyright (c) 2026 Mage Australia
+ * @license    https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout>
+    <adminhtml_b2bregistration_application_index>
+        <reference name="content">
+            <block type="b2bregistration/adminhtml_application" name="b2bregistration.application"/>
+        </reference>
+    </adminhtml_b2bregistration_application_index>
+
+    <adminhtml_b2bregistration_application_grid>
+        <block type="b2bregistration/adminhtml_application_grid" name="b2bregistration.application.grid" output="toHtml"/>
+    </adminhtml_b2bregistration_application_grid>
+</layout>

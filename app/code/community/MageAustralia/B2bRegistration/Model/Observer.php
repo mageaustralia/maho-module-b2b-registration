@@ -42,7 +42,7 @@ class MageAustralia_B2bRegistration_Model_Observer
         }
 
         try {
-            $helper->createCustomerFromSubmission($form, $submission);
+            $helper->processApplication($form, $submission);
         } catch (Throwable $e) {
             // A registration failure must never break the form submission.
             Mage::logException($e);
