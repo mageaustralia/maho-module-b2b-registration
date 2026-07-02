@@ -52,6 +52,15 @@
              customform_submission_created via a #[Maho\Config\Observer]
              attribute. Run `composer dump-autoload` after install.
         -->
+        <template>
+            <email>
+                <b2bregistration_new_application translate="label" module="b2bregistration">
+                    <label>B2B Registration - New trade application (admin)</label>
+                    <file>b2bregistration/new_application.html</file>
+                    <type>html</type>
+                </b2bregistration_new_application>
+            </email>
+        </template>
     </global>
 
     <adminhtml>
