@@ -1,0 +1,99 @@
+<!--@subject New trade application: {{var applicant_name}} @-->
+<!--@vars
+{
+"var applicant_name":"Applicant name",
+"var applicant_email":"Applicant email",
+"var company_name":"Company name (if supplied)",
+"var application_type":"New prospect or existing customer",
+"var submitted_at":"Submission time",
+"var store_name":"Store name",
+"var admin_url":"Trade Applications admin URL"
+}
+@-->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="color-scheme" content="light dark">
+    <title>New trade application</title>
+</head>
+<body style="margin:0; padding:0; width:100%; background-color:#f4f5f7; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+    <!-- preheader (hidden) -->
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0; mso-hide:all;">
+        {{var applicant_name}} submitted a trade-account application ({{var application_type}}).
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f7;">
+        <tr>
+            <td align="center" style="padding:24px 12px;">
+
+                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background-color:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb;">
+                    <!-- header bar -->
+                    <tr>
+                        <td style="background-color:#1f2937; padding:20px 28px;">
+                            <span style="font-family:Arial,Helvetica,sans-serif; font-size:18px; line-height:24px; font-weight:bold; color:#ffffff;">New trade application</span>
+                        </td>
+                    </tr>
+
+                    <!-- body -->
+                    <tr>
+                        <td style="padding:28px;">
+                            <p style="margin:0 0 16px; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; color:#111827;">
+                                A new trade-account application has been submitted on <strong>{{var store_name}}</strong> and is awaiting review.
+                            </p>
+
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px; border-collapse:collapse;">
+                                <tr>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:18px; color:#6b7280; width:40%;">Applicant</td>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:18px; color:#111827;">{{var applicant_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:18px; color:#6b7280;">Email</td>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:18px; color:#111827;">{{var applicant_email}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:18px; color:#6b7280;">Company</td>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:18px; color:#111827;">{{var company_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:18px; color:#6b7280;">Type</td>
+                                    <td style="padding:10px 0; border-bottom:1px solid #eef0f2; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:18px; color:#111827;">{{var application_type}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:18px; color:#6b7280;">Submitted</td>
+                                    <td style="padding:10px 0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:18px; color:#111827;">{{var submitted_at}}</td>
+                                </tr>
+                            </table>
+
+                            <!-- bulletproof button -->
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" bgcolor="#2563eb" style="border-radius:6px;">
+                                        <a href="{{var admin_url}}" target="_blank" style="display:inline-block; padding:12px 28px; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:20px; font-weight:bold; color:#ffffff; text-decoration:none; border-radius:6px;">Review in admin</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style="margin:24px 0 0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px; color:#9ca3af;">
+                                Approve to assign the B2B customer group (and open the account for new prospects); decline to reject the request.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- footer -->
+                    <tr>
+                        <td style="padding:18px 28px; background-color:#f9fafb; border-top:1px solid #eef0f2;">
+                            <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; color:#9ca3af;">
+                                Automated notification from {{var store_name}}. You are receiving this because your address is listed under System &gt; Configuration &gt; B2B Registration &gt; Admin Notifications.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

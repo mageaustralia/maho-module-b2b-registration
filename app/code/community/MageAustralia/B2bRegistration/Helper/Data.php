@@ -36,8 +36,12 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
     public const XML_B2B_GROUP   = 'b2bregistration/general/b2b_group';
     public const XML_OVERRIDES   = 'b2bregistration/mapping/overrides';
 
+    public const XML_NOTIFY_EMAILS = 'b2bregistration/notify/admin_emails';
+
     public const EVENT_CUSTOMER_CREATED = 'b2bregistration_customer_created';
     public const EVENT_GROUP_ASSIGNED   = 'b2bregistration_group_assigned';
+
+    public const EMAIL_NEW_APPLICATION = 'b2bregistration_new_application';
 
     /** Customer attributes a public application form may safely populate. */
     private const array ALLOWED_ATTRIBUTES = [
@@ -78,6 +82,13 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
     {
         $decoded = json_decode((string) Mage::getStoreConfig(self::XML_OVERRIDES, $storeId), true);
         return is_array($decoded) ? $decoded : [];
+    }
+
+    /** Admin addresses to notify on a new application. Empty = notifications off. @return list<string> */
+    public function getAdminNotifyEmails(?int $storeId = null): array
+    {
+        $raw = (string) Mage::getStoreConfig(self::XML_NOTIFY_EMAILS, $storeId);
+        return array_values(array_filter(array_map('trim', explode(',', $raw)), 'strlen'));
     }
 
     /**
@@ -148,7 +159,58 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
             'is_new'      => $isNew,
         ]);
 
+        $this->notifyAdminsOfApplication($application, $customer, $submission, $isNew);
+
         return $application;
+    }
+
+    /**
+     * Best-effort admin notice when an application arrives - for BOTH new
+     * prospects and existing-customer upgrade requests (customer-approval only
+     * covers the former). No-op when no recipients are configured; a mail
+     * failure never breaks intake.
+     */
+    public function notifyAdminsOfApplication(
+        Application $application,
+        Mage_Customer_Model_Customer $customer,
+        MageAustralia_CustomForms_Model_Submission $submission,
+        bool $isNew,
+    ): void {
+        $storeId    = (int) $application->getStoreId();
+        $recipients = $this->getAdminNotifyEmails($storeId);
+        if ($recipients === []) {
+            return;
+        }
+        try {
+            $payload = $submission->getDecodedPayload();
+            $company = trim((string) ($payload['company_name'] ?? ''));
+            $vars = [
+                'applicant_name'   => (string) $customer->getName(),
+                'applicant_email'  => (string) $customer->getEmail(),
+                'company_name'     => $company !== '' ? $company : '-',
+                'application_type' => $isNew
+                    ? $this->__('New prospect')
+                    : $this->__('Existing customer (upgrade request)'),
+                'submitted_at'     => (string) $application->getCreatedAt(),
+                'store_name'       => (string) Mage::app()->getStore($storeId)->getFrontendName(),
+                'admin_url'        => Mage::helper('adminhtml')->getUrl('adminhtml/b2bregistration_application'),
+            ];
+            foreach ($recipients as $recipient) {
+                /** @var Mage_Core_Model_Email_Template $mail */
+                $mail = Mage::getModel('core/email_template');
+                $mail->setDesignConfig(['area' => 'frontend', 'store' => $storeId]);
+                $mail->loadDefault(self::EMAIL_NEW_APPLICATION);
+                if (!$mail->getTemplateText()) {
+                    return; // template missing/unregistered - nothing to send
+                }
+                $mail->setSenderName((string) Mage::getStoreConfig('trans_email/ident_general/name', $storeId));
+                $mail->setSenderEmail((string) Mage::getStoreConfig('trans_email/ident_general/email', $storeId));
+                $mail->send($recipient, null, $vars);
+            }
+        } catch (Throwable $e) {
+            // A notification failure must never break the application intake.
+            Mage::logException($e);
+        }
     }
 
     /** Approve an application: assign the B2B group (and open the account if new). */

@@ -73,6 +73,21 @@
                         </overrides>
                     </fields>
                 </mapping>
+                <notify translate="label">
+                    <label>Admin Notifications</label>
+                    <comment>Optional. Email addresses that receive a notice whenever a new trade application arrives (both new prospects and existing-customer upgrade requests). Leave blank to disable.</comment>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                    <fields>
+                        <admin_emails translate="label comment">
+                            <label>Notify admin emails</label>
+                            <comment>Comma-separated. Blank = no email is sent (the application still appears in the Trade Applications grid).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default><show_in_website>1</show_in_website><show_in_store>1</show_in_store>
+                        </admin_emails>
+                    </fields>
+                </notify>
             </groups>
         </b2bregistration>
     </sections>
