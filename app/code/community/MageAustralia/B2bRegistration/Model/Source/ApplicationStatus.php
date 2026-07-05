@@ -27,7 +27,9 @@ class MageAustralia_B2bRegistration_Model_Source_ApplicationStatus
     public function toOptionHash(): array
     {
         $hash = [];
-        foreach ($this->toOptionArray() as $o) { $hash[$o['value']] = $o['label']; }
+        foreach ($this->toOptionArray() as $o) {
+            $hash[$o['value']] = $o['label'];
+        }
         return $hash;
     }
 }
