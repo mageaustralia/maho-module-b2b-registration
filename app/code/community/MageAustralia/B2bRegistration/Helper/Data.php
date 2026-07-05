@@ -58,7 +58,7 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
     public function getTradeFormCodes(?int $storeId = null): array
     {
         $raw = (string) Mage::getStoreConfig(self::XML_FORM_CODES, $storeId);
-        return array_values(array_filter(array_map('trim', explode(',', $raw)), 'strlen'));
+        return array_values(array_filter(array_map('trim', explode(',', $raw)), static fn(string $s): bool => $s !== ''));
     }
 
     public function isTradeForm(string $code, ?int $storeId = null): bool
@@ -88,7 +88,7 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
     public function getAdminNotifyEmails(?int $storeId = null): array
     {
         $raw = (string) Mage::getStoreConfig(self::XML_NOTIFY_EMAILS, $storeId);
-        return array_values(array_filter(array_map('trim', explode(',', $raw)), 'strlen'));
+        return array_values(array_filter(array_map('trim', explode(',', $raw)), static fn(string $s): bool => $s !== ''));
     }
 
     /**
