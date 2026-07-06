@@ -80,7 +80,11 @@ class MageAustralia_B2bRegistration_Helper_Data extends Mage_Core_Helper_Abstrac
     /** @return array<string,string> form-field-key => customer-attribute-code */
     public function getOverrides(?int $storeId = null): array
     {
-        $decoded = json_decode((string) Mage::getStoreConfig(self::XML_OVERRIDES, $storeId), true);
+        try {
+            $decoded = Mage::helper('core')->jsonDecode((string) Mage::getStoreConfig(self::XML_OVERRIDES, $storeId));
+        } catch (\JsonException | Mage_Core_Exception) {
+            $decoded = null;
+        }
         return is_array($decoded) ? $decoded : [];
     }
 
