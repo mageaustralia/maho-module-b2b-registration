@@ -20,6 +20,18 @@ and approved applicants land in your wholesale customer group automatically.
 - **Declarative schema** - `sql/schema.php`, idempotent with the legacy
   setup scripts
 
+## Screenshots
+
+**Customers apply via a CustomForms-driven trade application:**
+
+| Application form | Submitted |
+|---|---|
+| ![Trade application form](screenshots/trade-application-form.png) | ![Submitted](screenshots/application-submitted.png) |
+
+**Admins approve or decline from the applications grid:**
+
+![Admin applications grid](screenshots/admin-applications-grid.png)
+
 ## Requirements
 
 - Maho 26.5+ (tested on 26.7)
