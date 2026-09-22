@@ -20,7 +20,7 @@
     "homepage": "https://github.com/mageaustralia/maho-module-b2b-registration",
     "require": {
         "php": "^8.3",
-        "mahocommerce/maho": ">=26.5 <26.9",
+        "mahocommerce/maho": ">=26.5 <26.11",
         "mageaustralia/maho-module-custom-forms": "^1.0",
         "mageaustralia/maho-module-customer-approval": "^1.0"
     },

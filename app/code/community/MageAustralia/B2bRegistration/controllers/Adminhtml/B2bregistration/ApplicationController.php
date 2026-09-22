@@ -24,7 +24,10 @@ class MageAustralia_B2bRegistration_Adminhtml_B2bregistration_ApplicationControl
     #[\Override]
     public function preDispatch(): static
     {
-        $this->_setForcedFormKeyActions(['approve', 'decline', 'massApprove', 'massDecline']);
+        // Removed in Maho 26.9, where core key-checks every admin request itself
+        if (method_exists($this, '_setForcedFormKeyActions')) {
+            $this->_setForcedFormKeyActions(['approve', 'decline', 'massApprove', 'massDecline']);
+        }
         return parent::preDispatch();
     }
 
